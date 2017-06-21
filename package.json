@@ -1,0 +1,31 @@
+{
+  "name": "api-gateway-util",
+  "version": "0.0.1",
+  "description": "Utility for API Gateway",
+  "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/nak2k/node-api-gateway-util/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "tape": "^4.6.3"
+  },
+  "homepage": "https://github.com/nak2k/node-api-gateway-util",
+  "keywords": [
+    "aws",
+    "api-gateway"
+  ],
+  "license": "MIT",
+  "main": "lib",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nak2k/node-api-gateway-util.git"
+  },
+  "scripts": {
+    "test": "tape test/test*"
+  },
+  "files": [
+    "README.md",
+    "lib/"
+  ]
+}
