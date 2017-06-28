@@ -8,7 +8,7 @@ Utility for API Gateway.
 npm i api-gateway-util -S
 ```
 
-## matchByPath(resources, path)
+## matchByPath(resources, path[, callback])
 
 This function finds a resource that match by the argument `path` from `resources`.
 
@@ -16,6 +16,7 @@ This function finds a resource that match by the argument `path` from `resources
 
 - `resources`
 - `path`
+- `callback(err, result)`
 
 ### returning value
 

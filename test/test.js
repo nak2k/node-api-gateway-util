@@ -61,3 +61,19 @@ test('test matchByPath', t => {
     t.equal(result, null);
   }
 });
+
+test('test matchByPath with callback', t => {
+  t.plan(2);
+
+  const resources = [
+    {
+      id: "1",
+      path: "/",
+    },
+  ];
+
+  matchByPath(resources, '/xxx', (err, result) => {
+    t.error(err);
+    t.equal(result, null);
+  });
+});
