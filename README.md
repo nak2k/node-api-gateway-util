@@ -8,28 +8,34 @@ Utility for API Gateway.
 npm i api-gateway-util -S
 ```
 
-## matchByPath(resources, path[, callback])
+## matchByPath(resources, path, callback = Array)
 
 This function finds a resource that match by the argument `path` from `resources`.
 
 ### arguments
 
 - `resources`
+    - An array of resources are returned by `getResources` of [APIGateway](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/APIGateway.html).
 - `path`
+    - A string of path.
 - `callback(err, result)`
+    - A function called when the search is completed or an error occurs.
+    - `err`
+        - An error object when an error occurs.
+        - When successful, `null` passed into this argument.
+    - `result`
+        - An object of a resource matched by path.
+        - If not matched, `null` passed into this argument.
 
 ### returning value
 
-This function returns the following array
+If `callback` is omitted, this function returns the following array.
 
 ``` javascript
 [err, result]
 ```
 
-- `err`
-- `result`
-- `result.resource`
-- `result.pathParameters`
+For the definition of `err` and` result`, see the description of `callback`.
 
 ## License
 
