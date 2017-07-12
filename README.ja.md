@@ -8,16 +8,18 @@ API Gateway 用のユーティリティパッケージ。
 npm i api-gateway-util -S
 ```
 
-## matchByPath(resources, path, callback = Array)
+## matchBy(resources, options, callback = Array)
 
-この関数は `resources` から引数 `path` にマッチしたリソースを見つける。
+この関数は `resources` から引数 `options` にマッチしたリソースを見つける。
 
 ### arguments
 
 - `resources`
     - [APIGateway](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/APIGateway.html) の `getResources` によって返されるリソースの配列。
-- `path`
-    - A string of path.
+- `options.path`
+    - 見つけるリソースのパス。
+- `options.method`
+    - 見つけるリソースが持つメソッド定義。
 - `callback(err, result)`
     - 探索が完了した時、あるいはエラーが起きた時に呼ばれる関数。
     - `err`

@@ -1,8 +1,7 @@
 const test = require('tape');
 const {
   getPathParameter,
-  matchByPath,
-  matchByReq,
+  matchBy,
 } = require('..');
 
 test('test getPathParameter', t => {
@@ -45,7 +44,7 @@ test('test getPathParameter', t => {
   }
 });
 
-test('test matchByPath', t => {
+test('test matchBy', t => {
   t.plan(2);
 
   const resources = [
@@ -56,14 +55,14 @@ test('test matchByPath', t => {
   ];
 
   {
-    const [err, result] = matchByPath(resources, '/xxx');
+    const [err, result] = matchBy(resources, { path: '/xxx' });
 
     t.error(err);
     t.equal(result, null);
   }
 });
 
-test('test matchByPath with callback', t => {
+test('test matchBy with callback', t => {
   t.plan(2);
 
   const resources = [
@@ -73,14 +72,14 @@ test('test matchByPath with callback', t => {
     },
   ];
 
-  matchByPath(resources, '/xxx', (err, result) => {
+  matchBy(resources, { path: '/xxx' }, (err, result) => {
     t.error(err);
     t.equal(result, null);
   });
 });
 
-test('test matchByReq', t => {
-  t.plan(9);
+test('test matchBy with method', t => {
+  t.plan(15);
 
   const resources = [
     {
@@ -111,7 +110,7 @@ test('test matchByReq', t => {
       parentId: '2',
       pathPart: "signin",
       resourceMethods: {
-        GET: {
+        POST: {
           methodIntegration: {
           },
         },
@@ -131,21 +130,33 @@ test('test matchByReq', t => {
     },
   ];
 
-  matchByReq(resources, { path: '/xxx', method: 'GET' }, (err, result) => {
+  matchBy(resources, { path: '/xxx', method: 'GET' }, (err, result) => {
     t.error(err);
     t.equal(result, null);
   });
 
-  matchByReq(resources, { path: '/', method: 'GET' }, (err, result) => {
+  matchBy(resources, { path: '/', method: 'GET' }, (err, result) => {
     t.error(err);
     t.ok(result);
     t.ok(result.resourceMethod);
     t.ok(result.resourceMethod.methodIntegration);
   });
 
-  matchByReq(resources, { path: '/greedy/signin', method: 'POST' }, (err, result) => {
+  matchBy(resources, { path: '/greedy/signin', method: 'POST' }, (err, result) => {
     t.error(err);
     t.ok(result);
-    t.equal(result.id, "3");
+    t.equal(result.resource.id, "3");
+  });
+
+  matchBy(resources, { path: '/greedy/signin', method: 'GET' }, (err, result) => {
+    t.error(err);
+    t.ok(result);
+    t.equal(result.resource.id, "4");
+  });
+
+  matchBy(resources, { path: '/greedy/', method: 'GET' }, (err, result) => {
+    t.error(err);
+    t.ok(result);
+    t.equal(result.resource.id, "4");
   });
 });
