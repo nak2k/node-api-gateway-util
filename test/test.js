@@ -80,7 +80,7 @@ test('test matchByPath with callback', t => {
 });
 
 test('test matchByReq', t => {
-  t.plan(6);
+  t.plan(9);
 
   const resources = [
     {
@@ -88,6 +88,42 @@ test('test matchByReq', t => {
       path: "/",
       resourceMethods: {
         GET: {
+          methodIntegration: {
+          },
+        },
+      },
+    },
+    {
+      id: "2",
+      path: "/greedy",
+      parentId: '1',
+      pathPart: 'greedy',
+      resourceMethods: {
+        GET: {
+          methodIntegration: {
+          },
+        },
+      },
+    },
+    {
+      id: "3",
+      path: "/greedy/signin",
+      parentId: '2',
+      pathPart: "signin",
+      resourceMethods: {
+        GET: {
+          methodIntegration: {
+          },
+        },
+      },
+    },
+    {
+      id: "4",
+      path: "/greedy/{param+}",
+      parentId: '2',
+      pathPart: "{param+}",
+      resourceMethods: {
+        ANY: {
           methodIntegration: {
           },
         },
@@ -105,5 +141,11 @@ test('test matchByReq', t => {
     t.ok(result);
     t.ok(result.resourceMethod);
     t.ok(result.resourceMethod.methodIntegration);
+  });
+
+  matchByReq(resources, { path: '/greedy/signin', method: 'POST' }, (err, result) => {
+    t.error(err);
+    t.ok(result);
+    t.equal(result.id, "3");
   });
 });
