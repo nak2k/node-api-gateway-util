@@ -37,7 +37,7 @@ If `callback` is omitted, this function returns the following array.
 [err, result]
 ```
 
-For the definition of `err` and` result`, see the description of `callback`.
+For the definition of `err` and `result`, see the description of `callback`.
 
 ## License
 
