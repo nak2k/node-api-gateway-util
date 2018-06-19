@@ -1,8 +1,25 @@
 const test = require('tape');
 const {
+  getOrCreateResource,
   getPathParameter,
   matchBy,
 } = require('..');
+
+test('test getPathParameter', t => {
+  t.plan(4);
+
+  const resources = [];
+
+  const resourceC = getOrCreateResource(resources, '/a/b/c');
+
+  t.equal(resourceC.pathPart, 'c');
+  t.equal(resources.length, 4);
+
+  const resourceB = getOrCreateResource(resources, '/a/b');
+
+  t.equal(resourceB.pathPart, 'b');
+  t.equal(resources.length, 4);
+});
 
 test('test getPathParameter', t => {
   t.plan(8);
