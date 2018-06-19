@@ -22,6 +22,7 @@
     "url": "git+https://github.com/nak2k/node-api-gateway-util.git"
   },
   "scripts": {
+    "prepublishOnly": "npm t",
     "test": "tape test/test*"
   },
   "files": [
